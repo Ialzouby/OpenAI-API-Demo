@@ -6,6 +6,7 @@ const cards = [
   { title: 'Text-to-Speech API', route: '/tts', emoji: '🔊' },
   { title: 'Whisper Transcribe API', route: '/whisper', emoji: '🎤' },
   { title: 'Content Moderation API', route: '/moderate', emoji: '🛡️' },
+  { title: 'API Documentation', route: '/docs', emoji: '📚' },
 ]
 
 export default function Home() {
@@ -26,6 +27,7 @@ export default function Home() {
       <div className="shape shape-blob shape-4"></div>
       <div className="shape shape-circle shape-5"></div>
       <div className="shape shape-square shape-6"></div>
+      
 
       {/* Responsive Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-6xl w-full px-4 z-10">

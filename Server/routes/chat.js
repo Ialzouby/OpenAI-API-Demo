@@ -11,7 +11,7 @@ router.post('/', async (req, res) => {
     const completion = await openai.chat.completions.create({
       model: 'gpt-3.5-turbo',
       messages,
-    });
+    }); 
 
     res.json({ response: completion.choices[0].message.content });
   } catch (err) {
