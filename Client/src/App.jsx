@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
-import Home from './components/Home'
-import Chat from './components/Chat'
+import Home from './components/home'
+import Chat from './components/chat'
 import Dalle from './components/Dalle'
 import TTS from './components/TTS'
 import Whisper from './components/Whisper'
