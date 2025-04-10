@@ -10,11 +10,12 @@ const cards = [
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-[#f4f7fa] to-[#eaeef6] relative overflow-hidden">
-      <h1 className="text-4xl font-bold text-center mb-6">
-        AI-Powered Development <span className="text-primary">- OpenAI Demo</span>
-      </h1>
-      <p className="text-center text-gray-500 mb-10 max-w-3xl mx-auto">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-[#f4f7fa] to-[#eaeef6] relative overflow-hidden pb-10">
+    <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 px-4 leading-snug">
+      AI-Powered Development <span className="text-primary block sm:inline">- OpenAI Demo</span>
+    </h1>
+
+      <p className="text-center text-gray-500 mb-10 max-w-2xl mx-auto px-4 text-sm sm:text-base">
         Explore various OpenAI APIs through interactive, beautiful demos. Click any card below to try it out!
       </p>
 
@@ -26,7 +27,8 @@ export default function Home() {
       <div className="shape shape-circle shape-5"></div>
       <div className="shape shape-square shape-6"></div>
 
-      <div className="grid-container z-10">
+      {/* Responsive Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-6xl w-full px-4 z-10">
         {cards.map(({ title, route, emoji }) => (
           <Link
             key={route}

@@ -15,17 +15,15 @@
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background: linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(0, 0, 0, 0.03) 100%), #f0f0f0;
   background-size: 80px 80px;
   background-repeat: repeat;
   color: var(--text-color);
   padding: 0;
   position: relative;
+  min-height: 100vh;
 }
+
 
 /* Heading Styles */
 h1 {
