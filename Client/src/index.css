@@ -1,0 +1,155 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global Body Styling */
+:root {
+  --primary-color: #6D4CFF; /* Soft Purple */
+  --bg-color-light: #f7f8fa; /* Light background for page */
+  --card-color: #FFFFFF; /* White background for cards */
+  --text-color: #2D2D2D; /* Dark text for readability */
+  --border-color: rgba(109, 76, 255, 0.2); /* Light purple border for cards */
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  height: 100vh; /* Full viewport height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(0, 0, 0, 0.03) 100%), #f0f0f0;
+  background-size: 80px 80px; /* Subtle grid effect */
+  background-repeat: repeat;
+  color: var(--text-color);
+  padding: 0; /* Remove any default padding */
+  position: relative;
+}
+
+/* Hovering Shapes Styling */
+.shape {
+  position: absolute;
+  background-color: rgba(109, 76, 255, 0.3);
+  border-radius: 50%;
+  transition: all 0.3s ease-in-out;
+}
+
+.shape:hover {
+  transform: scale(1.1) rotate(15deg);
+}
+
+/* Shape Sizes and Animation */
+.shape-1 {
+  width: 150px;
+  height: 150px;
+  top: 20%;
+  left: 10%;
+  animation: floating 6s infinite ease-in-out;
+}
+
+.shape-2 {
+  width: 100px;
+  height: 100px;
+  top: 30%;
+  right: 15%;
+  animation: floating 5s infinite ease-in-out;
+}
+
+.shape-3 {
+  width: 120px;
+  height: 120px;
+  top: 50%;
+  left: 50%;
+  animation: floating 7s infinite ease-in-out;
+}
+
+.shape-4 {
+  width: 80px;
+  height: 80px;
+  bottom: 10%;
+  right: 10%;
+  animation: floating 4s infinite ease-in-out;
+}
+
+@keyframes floating {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-30px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Heading Styles */
+h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--text-color);
+}
+
+/* Simple, Modern Buttons */
+button {
+  border-radius: 0.5rem;
+  border: 2px solid var(--primary-color);
+  background-color: var(--primary-color);
+  color: white;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: transparent;
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+}
+
+/* Card Layout */
+.card {
+  background-color: var(--card-color);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  border: 2px solid var(--border-color);
+  max-width: 100%;
+  width: 100%;
+  text-align: center;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0px 6px 25px rgba(109, 76, 255, 0.3);
+  transform: translateY(-4px);
+}
+
+/* Grid Layout for Cards */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Typography for Cards */
+h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin-top: 1rem;
+}
+
+/* Subtle Hover Effects */
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0px 8px 30px rgba(79, 70, 229, 0.15);
+}
