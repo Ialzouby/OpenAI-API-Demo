@@ -2,85 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Global Body Styling */
+/* Global Variables */
 :root {
   --primary-color: #6D4CFF; /* Soft Purple */
-  --bg-color-light: #f7f8fa; /* Light background for page */
-  --card-color: #FFFFFF; /* White background for cards */
-  --text-color: #2D2D2D; /* Dark text for readability */
-  --border-color: rgba(109, 76, 255, 0.2); /* Light purple border for cards */
+  --bg-color-light: #f7f8fa;
+  --card-color: #FFFFFF;
+  --text-color: #2D2D2D;
+  --border-color: rgba(109, 76, 255, 0.2);
 }
 
+/* Global Body Styling */
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
-  height: 100vh; /* Full viewport height */
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   background: linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(0, 0, 0, 0.03) 100%), #f0f0f0;
-  background-size: 80px 80px; /* Subtle grid effect */
+  background-size: 80px 80px;
   background-repeat: repeat;
   color: var(--text-color);
-  padding: 0; /* Remove any default padding */
+  padding: 0;
   position: relative;
-}
-
-/* Hovering Shapes Styling */
-.shape {
-  position: absolute;
-  background-color: rgba(109, 76, 255, 0.3);
-  border-radius: 50%;
-  transition: all 0.3s ease-in-out;
-}
-
-.shape:hover {
-  transform: scale(1.1) rotate(15deg);
-}
-
-/* Shape Sizes and Animation */
-.shape-1 {
-  width: 150px;
-  height: 150px;
-  top: 20%;
-  left: 10%;
-  animation: floating 6s infinite ease-in-out;
-}
-
-.shape-2 {
-  width: 100px;
-  height: 100px;
-  top: 30%;
-  right: 15%;
-  animation: floating 5s infinite ease-in-out;
-}
-
-.shape-3 {
-  width: 120px;
-  height: 120px;
-  top: 50%;
-  left: 50%;
-  animation: floating 7s infinite ease-in-out;
-}
-
-.shape-4 {
-  width: 80px;
-  height: 80px;
-  bottom: 10%;
-  right: 10%;
-  animation: floating 4s infinite ease-in-out;
-}
-
-@keyframes floating {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-30px);
-  }
-  100% {
-    transform: translateY(0);
-  }
 }
 
 /* Heading Styles */
@@ -92,7 +36,7 @@ h1 {
   color: var(--text-color);
 }
 
-/* Simple, Modern Buttons */
+/* Button Styles */
 button {
   border-radius: 0.5rem;
   border: 2px solid var(--primary-color);
@@ -108,10 +52,9 @@ button {
 button:hover {
   background-color: transparent;
   color: var(--primary-color);
-  border: 2px solid var(--primary-color);
 }
 
-/* Card Layout */
+/* Card Styling */
 .card {
   background-color: var(--card-color);
   padding: 2rem;
@@ -122,6 +65,7 @@ button:hover {
   width: 100%;
   text-align: center;
   transition: box-shadow 0.3s ease, transform 0.3s ease;
+  z-index: 1;
 }
 
 .card:hover {
@@ -129,7 +73,7 @@ button:hover {
   transform: translateY(-4px);
 }
 
-/* Grid Layout for Cards */
+/* Grid Layout */
 .grid-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -148,8 +92,68 @@ h2 {
   margin-top: 1rem;
 }
 
-/* Subtle Hover Effects */
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0px 8px 30px rgba(79, 70, 229, 0.15);
+/* SHAPES */
+/* Base Shape Styles */
+.shape {
+  position: absolute;
+  opacity: 0.4;
+  z-index: 0;
+  transition: transform 0.5s ease;
 }
+
+.shape:hover {
+  transform: scale(1.1) rotate(10deg);
+}
+
+.shape-circle,
+.shape-square,
+.shape-triangle,
+.shape-blob {
+  background-color: rgba(109, 76, 255, 0.1);
+}
+
+/* Circles */
+.shape-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
+
+/* Squares */
+.shape-square {
+  width: 100px;
+  height: 100px;
+  transform: rotate(15deg);
+}
+
+/* Triangles */
+.shape-triangle {
+  width: 0;
+  height: 0;
+  border-left: 40px solid transparent;
+  border-right: 40px solid transparent;
+  border-bottom: 70px solid rgba(109, 76, 255, 0.1);
+  background: none;
+}
+
+/* Blobs using clip-path */
+.shape-blob {
+  width: 160px;
+  height: 120px;
+  background-color: rgba(109, 76, 255, 0.1);
+  clip-path: polygon(60% 0%, 100% 38%, 89% 100%, 21% 88%, 0% 43%);
+}
+
+/* Floating Animation */
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+/* Positioning */
+.shape-1 { top: 10%; left: 5%; animation: floaty 6s ease-in-out infinite; }
+.shape-2 { top: 30%; right: 5%; animation: floaty 7s ease-in-out infinite; }
+.shape-3 { bottom: 20%; left: 10%; animation: floaty 5s ease-in-out infinite; }
+.shape-4 { bottom: 10%; right: 10%; animation: floaty 6s ease-in-out infinite; }
+.shape-5 { top: 60%; left: 80%; animation: floaty 4s ease-in-out infinite; }
+.shape-6 { top: 50%; right: 80%; animation: floaty 5s ease-in-out infinite; }
