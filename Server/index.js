@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const app = express();
+app.use(express.json()); // ✅ Required for parsing JSON bodies
 
 dotenv.config();
 app.use(cors());

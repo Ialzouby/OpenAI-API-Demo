@@ -3,15 +3,41 @@ import axios from 'axios';
 
 export default function TTS() {
   const [text, setText] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const speak = async () => {
+    if (!text.trim()) return;
+    setLoading(true);
+
     try {
-      const res = await axios.post('http://localhost:5050/api/tts', { text }, { responseType: 'blob' });
+      const isLocal = window.location.hostname === "localhost";
+      const API_BASE = isLocal
+        ? "http://localhost:5050"
+        : import.meta.env.VITE_API_BASE_URL;
+
+      const res = await axios.post(
+        `${API_BASE}/api/tts`,
+        { text },
+        { responseType: 'blob' }
+      );
+
       const url = URL.createObjectURL(res.data);
       const audio = new Audio(url);
-      audio.play();
+
+      // Optional: append audio controls to debug
+      const audioPlayer = document.createElement("audio");
+      audioPlayer.src = url;
+      audioPlayer.controls = true;
+      document.body.appendChild(audioPlayer);
+
+      audio.play().catch((err) => {
+        console.error("Audio play error:", err);
+      });
     } catch (err) {
-      console.error(err);
+      console.error("TTS Error:", err.response?.data || err.message);
+      alert("Failed to generate speech.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -25,7 +51,7 @@ export default function TTS() {
 
         <textarea
           value={text}
-          onChange={e => setText(e.target.value)}
+          onChange={(e) => setText(e.target.value)}
           placeholder="Enter text..."
           rows={6}
           className="w-full p-4 border border-gray-300 rounded-lg mb-4 focus:ring-2 focus:ring-blue-600 outline-none"
@@ -34,10 +60,10 @@ export default function TTS() {
         <div className="flex justify-center">
           <button
             onClick={speak}
-            disabled={!text}
+            disabled={!text || loading}
             className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-all disabled:opacity-50"
           >
-            Play
+            {loading ? "Loading..." : "Play"}
           </button>
         </div>
       </div>

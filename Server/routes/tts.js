@@ -8,31 +8,41 @@ router.post('/', async (req, res) => {
   try {
     const { text } = req.body;
 
-    // Validate input
     if (!text || typeof text !== 'string') {
       return res.status(400).json({ error: 'Text is required for TTS' });
     }
 
-    // Generate speech
-    const mp3 = await openai.audio.speech.create({
+    const response = await openai.audio.speech.create({
       model: 'tts-1',
-      voice: 'alloy', // alloy, echo, fable, onyx, nova, shimmer
+      voice: 'nova',
       input: text,
       response_format: 'mp3',
     });
 
-    const buffer = Buffer.from(await mp3.arrayBuffer());
+// OpenAI TTS voices (choose one):
+// 'alloy'   → Warm, engaging male voice
+// 'echo'    → Calm, conversational female voice
+// 'fable'   → Animated, storytelling tone
+// 'onyx'    → Deep, crisp male voice
+// 'nova'    → Bright, expressive female voice
+// 'shimmer' → Soft, melodic high-pitched voice
+
+
+    const buffer = Buffer.from(await response.arrayBuffer());
 
     res.set({
       'Content-Type': 'audio/mpeg',
+      'Content-Length': buffer.length,
       'Content-Disposition': 'inline; filename="speech.mp3"',
     });
 
     res.send(buffer);
   } catch (err) {
     console.error('TTS error:', err.response?.data || err.message || err);
-    res.status(500).json({ error: err.message || 'TTS generation failed' });
+    res.status(500).json({ error: 'TTS generation failed' });
   }
 });
 
 module.exports = router;
+
+

@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom'
 
 const cards = [
-  { title: 'ChatGPT', route: '/chat', emoji: '💬' },
-  { title: 'DALL·E Image Gen', route: '/dalle', emoji: '🎨' },
-  { title: 'Text-to-Speech', route: '/tts', emoji: '🔊' },
-  { title: 'Whisper Transcribe', route: '/whisper', emoji: '🎤' },
-  { title: 'Content Moderation', route: '/moderate', emoji: '🛡️' },
+  { title: 'Conversations API', route: '/chat', emoji: '💬' },
+  { title: 'DALL·E Image Gen API', route: '/dalle', emoji: '🎨' },
+  { title: 'Text-to-Speech API', route: '/tts', emoji: '🔊' },
+  { title: 'Whisper Transcribe API', route: '/whisper', emoji: '🎤' },
+  { title: 'Content Moderation API', route: '/moderate', emoji: '🛡️' },
 ]
 
 export default function Home() {
