@@ -13,8 +13,8 @@ app.get('/', (req, res) => {
   });
   
   
-const chatRoute = require('./Routes/Chat');
-const dalleRoute = require('./Routes/Dalle');
+const chatRoute = require('./routes/chat');
+const dalleRoute = require('./routes/dalle');
 const ttsRoute = require('./routes/tts');
 const moderationRoute = require('./routes/moderation');
 const whisperRoute = require('./routes/whisper');
