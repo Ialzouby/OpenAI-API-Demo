@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
-import Home from './components/home'
+import Home from './components/Home'
 import Chat from './components/Chat'
 import Dalle from './components/Dalle'
 import TTS from './components/TTS'
