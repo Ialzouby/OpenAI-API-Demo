@@ -10,9 +10,14 @@ export default function Dalle() {
     if (!prompt.trim()) return;
     setLoading(true);
     setImage("");
-
+  
     try {
-      const res = await axios.post("/api/dalle", { prompt });
+      const isLocal = window.location.hostname === "localhost";
+      const API_BASE = isLocal
+        ? "http://localhost:5050"
+        : import.meta.env.VITE_API_BASE_URL;
+  
+      const res = await axios.post(`${API_BASE}/api/dalle`, { prompt });
       setImage(res.data.image);
     } catch (err) {
       console.error(err);
@@ -21,6 +26,7 @@ export default function Dalle() {
       setLoading(false);
     }
   };
+  
 
   return (
     <div className="flex items-center justify-center h-screen w-screen px-4 relative overflow-hidden">
