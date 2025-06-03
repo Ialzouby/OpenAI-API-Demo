@@ -1,201 +1,77 @@
-# OpenAI Full‑Stack Demo
+<p align="center">
+  <!-- ⇣⇣  Replace with your screenshots ⇣⇣ -->
+  <img src="docs/hero-left.png" width="49%" alt="UNCC Students coding with AI"/>
+  <img src="docs/hero-right.png" width="49%" alt="Live Demo Screenshot"/>
+</p>
 
-*Interactive showcase of OpenAI Chat, DALL·E 3, TTS, Whisper & Moderation APIs (React + Express)*
+# UNCC × OpenAI **Playground**
 
----
-
-## Data Flow & Architecture
-```mermaid
-flowchart TD
-    subgraph Browser (React SPA @ Vite)
-        A[Home → /Chat / Dalle / TTS / Whisper / Moderate / Docs]
-        B(User Input)
-    end
-    subgraph Express API Layer
-        C[/index.js/]
-        D[/routes/chat.js/]
-        E[/routes/dalle.js/]
-        F[/routes/tts.js/]
-        G[/routes/whisper.js/]
-        H[/routes/moderation.js/]
-        I[OpenAI SDK]
-        J[uploads/*]
-    end
-
-    B--POST /api/chat-->D
-    B--POST /api/dalle-->E
-    B--POST /api/tts-->F
-    B--POST /api/whisper-->G
-    B--POST /api/moderate-->H
-
-    D & E & F & G & H--->I
-    G--stores tmp-->J
-    G--cleanup-->J
-    C--JSON Back-->A
-```
+> A compact teaching repo that walks Charlotte 49ers through crafting **AI‑powered** web apps with the OpenAI API, React + Vite on the front‑end, and an Express API on the back.
 
 ---
 
-## Project Overview
-This repository contains a **full‑stack demo application** showcasing multiple OpenAI capabilities:
+## 🍀 Why this project?
 
-* A **React (19) + Vite** single‑page front‑end with Tailwind CSS & animated UI cards.  
-* A **Node.js (Express 5) backend** that proxies five REST endpoints to OpenAI’s GPT‑4o family: Chat Completions, DALL·E 3 image generation, Text‑To‑Speech, Whisper speech‑to‑text and Content Moderation.
-
-Everything runs locally with zero external database dependencies—perfect for rapid prototyping, hack‑days or teaching.
-
----
-
-## Features
-| Feature | Description |
-|---------|-------------|
-| 💬 **Chatbot** | Conversational endpoint using `gpt‑3.5‑turbo` (easy to swap for `gpt‑4o`). |
-| 🎨 **DALL·E 3** | Generates 1024×1024 images from text prompts. |
-| 🔊 **Text‑To‑Speech** | Converts text into MP3 in‑memory using `tts‑1` (`voice: nova`). |
-| 🎤 **Whisper STT** | Upload audio → returns transcription (`whisper‑1`), temp file auto‑cleanup. |
-| 🛡️ **Moderation** | Flags harmful content with **omni‑moderation‑latest**. |
-| ⚡ **Vite + Tailwind** | Instant reload, responsive dark‑mode design & floating SVG shapes. |
-| 🔐 **.env Support** | Keep your `OPENAI_API_KEY` out of source control. |
-| 🌐 **Proxy Dev Server** | `/api/*` requests are proxied to `localhost:5050` during `npm run dev`. |
+* **Made for the classroom** – every line is commented so beginner devs can follow along.
+* **Full‑stack, zero‑DB** – deploy anywhere without a database.
+* **One repo, many demos** – Chat, DALL·E, Moderation, Whisper & TTS.
+* **Tailwind flair** – modern components + fun floating shapes.
 
 ---
 
-## Directory Structure
-```txt
-root
-├── Client/                 # React ℹ️
-│   ├── src/components/     # Chat, Dalle, TTS, Whisper, Moderation, Docs
-│   ├── index.html
-│   └── tailwind.config.js
-├── Server/                 # Express API
-│   ├── routes/             # chat.js • dalle.js • tts.js…
-│   ├── uploads/            # transient audio files
-│   └── index.js            # entry‑point
-└── README.md               # ← you are here
-```
-
----
-
-## Quick Start
+## 🚀 Quick Start
 
 ```bash
-# 1. Clone
-git clone https://github.com/you/openai-demo.git
-cd openai-demo
+# 1. Clone & install (root dir installs both client & server)
+git clone https://github.com/your‑org/uncc-openai-demo.git
+cd uncc-openai-demo
 
-# 2. Set secrets
-echo "OPENAI_API_KEY=sk‑..." > .env
+# 2. Add your key
+echo "OPENAI_API_KEY=sk-..." > Server/.env
 
-# 3. Install deps
-npm install     # root dev deps (lint etc.)
-cd Server && npm install
-cd ../Client && npm install
-
-# 4. Run both servers (two terminals)
-cd Server && node index.js          # → http://localhost:5050
-cd Client && npm run dev            # → http://localhost:5173
+# 3. Dev servers (concurrently)
+npm run dev         # Client (Vite) on :5173
+npm --workspace=Server start   # API on :5050
 ```
 
 ---
 
-## Scripts
+## 🗂️ Directory Glimpse
 
-<details>
-<summary>Client <code>package.json</code></summary>
-
-```jsonc
-"scripts": {
-  "dev": "vite",
-  "build": "vite build",
-  "lint": "eslint .",
-  "preview": "vite preview"
-}
+```txt
+root
+├── Client   # React + Vite SPA
+│   └── src/components   # Chat, DALL·E, etc.
+└── Server   # Express API routes
+    ├── routes/chat.js
+    └── ...              # dalle.js, tts.js, whisper.js, moderation.js
 ```
-</details>
-
-<details>
-<summary>Server <code>package.json</code></summary>
-
-```jsonc
-"scripts": {
-  "start": "node index.js"
-}
-```
-</details>
 
 ---
 
-## API Reference
+## 🔌 API Cheatsheet
 
-### POST `/api/chat`
-```jsonc
-{ "messages": [ { "role": "user", "content": "Hello!" } ] }
-```
-→ `200 { "response": "Hi there 👋" }`
-
----
-
-### POST `/api/dalle`
-```jsonc
-{ "prompt": "A neon robot reading a book" }
-```
-→ `200 { "image": "https://..." }`
+| Route | Body | Returns |
+|-------|------|---------|
+| `POST /api/chat` | `{ messages:[...] }` | `{ response }` |
+| `POST /api/dalle` | `{ prompt }` | `{ image }` |
+| `POST /api/tts` | `{ text }` | `audio/mp3` |
+| `POST /api/whisper` | `FormData audio` | `{ text }` |
+| `POST /api/moderate` | `{ input }` | `{ flagged, categories }` |
 
 ---
 
-### POST `/api/tts`
-```jsonc
-{ "text": "Hello world" }
-```
-Response: `audio/mpeg` (MP3 buffer).
-
----
-
-### POST `/api/whisper`
-*Multipart form‑data* with **`audio`** file →  
-`200 { "text": "…transcription…" }`
-
----
-
-### POST `/api/moderate`
-```jsonc
-{ "input": "Some text to audit" }
-```
-→ `200 { "flagged": false, "categories": { ... } }`
-
----
-
-## Static Asset Pipeline
+## 🎨 Flow (Client ⇄ Server ⇄ OpenAI)
 ```mermaid
-graph LR
-    React(Vite + React 19) --> Browser
-    Tailwind(tailwind.css) --> Browser
-    Icons(Emoji/SVG) --> Browser
-    Browser((Chrome, Edge…))
+flowchart LR
+    A[React SPA] -- REST --> B[/Express Routes/]
+    B -- OpenAI SDK --> C[GPT‑4o / DALL·E / etc.]
 ```
 
 ---
 
-## Screenshots
-| Home (Light) | Chat (Dark) |
-|--------------|-------------|
-| _Add your screenshots here_ | _Add your screenshots here_ |
+## 📜 License
 
----
+MIT – reuse for labs, hackathons, or your next side‑quest.
 
-## Contributing
-1. **Fork** the repo  
-2. `git checkout -b feat/my‑awesome‑feature`  
-3. Commit with [Conventional Commits](https://www.conventionalcommits.org)  
-4. Open a PR – a template will guide you.
-
-Please **do not commit `.env`** or any secret keys.
-
----
-
-## License
-[MIT](LICENSE) © 2025 Your Name
-
----
-
-> _Built with 🧡 & ☕ – last updated 2025._
+*Built with 💚 at the University of North Carolina at Charlotte*
