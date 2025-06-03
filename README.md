@@ -10,6 +10,26 @@
 
 ---
 
+## 🎨 Flow (Client ⇄ Server ⇄ OpenAI)
+```mermaid
+flowchart LR
+    A[React SPA] -- REST --> B[/Express Routes/]
+    B -- OpenAI SDK --> C[GPT‑4o / DALL·E / etc.]
+```
+---
+
+## 🔌 API Cheatsheet
+
+| Route | Body | Returns |
+|-------|------|---------|
+| `POST /api/chat` | `{ messages:[...] }` | `{ response }` |
+| `POST /api/dalle` | `{ prompt }` | `{ image }` |
+| `POST /api/tts` | `{ text }` | `audio/mp3` |
+| `POST /api/whisper` | `FormData audio` | `{ text }` |
+| `POST /api/moderate` | `{ input }` | `{ flagged, categories }` |
+
+---
+
 ## 🍀 Why this project?
 
 * **Made for the classroom** – every line is commented so beginner devs can follow along.
@@ -45,27 +65,6 @@ root
 └── Server   # Express API routes
     ├── routes/chat.js
     └── ...              # dalle.js, tts.js, whisper.js, moderation.js
-```
-
----
-
-## 🔌 API Cheatsheet
-
-| Route | Body | Returns |
-|-------|------|---------|
-| `POST /api/chat` | `{ messages:[...] }` | `{ response }` |
-| `POST /api/dalle` | `{ prompt }` | `{ image }` |
-| `POST /api/tts` | `{ text }` | `audio/mp3` |
-| `POST /api/whisper` | `FormData audio` | `{ text }` |
-| `POST /api/moderate` | `{ input }` | `{ flagged, categories }` |
-
----
-
-## 🎨 Flow (Client ⇄ Server ⇄ OpenAI)
-```mermaid
-flowchart LR
-    A[React SPA] -- REST --> B[/Express Routes/]
-    B -- OpenAI SDK --> C[GPT‑4o / DALL·E / etc.]
 ```
 
 ---
