@@ -1,7 +1,7 @@
 <p align="center">
   <!-- ⇣⇣  Replace with your screenshots ⇣⇣ -->
-  <img src="docs/hero-left.png" width="49%" alt="UNCC Students coding with AI"/>
-  <img src="docs/hero-right.png" width="49%" alt="Live Demo Screenshot"/>
+  <img src="openai-demo1.png" width="49%" alt="UNCC Students coding with AI"/>
+  <img src="openai-demo2.png" width="49%" alt="Live Demo Screenshot"/>
 </p>
 
 # UNCC × OpenAI **Playground**
